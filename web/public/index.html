@@ -21,21 +21,15 @@
     <script>
 $(function(){
 var update = function(){
-$.get("http://localhost:8080/polls/?key=abc123", null, null,
-"json")
-.done(function(polls){
-$("#polls").empty();
-for (var p in polls) {
-var poll = polls[p];
-$("#polls").append(
-$("<li>").append(
-$("<a>")
-.attr("href", "view.html?poll=polls/" + poll.id)
-.text(poll.title)
-)
-)
-}
-}
+    $.get("http://localhost:8080/polls/?key=abc123", null, null, "json").done(function(polls){
+
+        $("#polls").empty();
+        // console.log(polls);
+        for (var p in polls) {
+            var poll = polls[p];
+            $("#polls").append($("<li>").append($("<a>").attr("href", "view.html?poll=polls/" + poll.id).text(poll.Title)))
+        }
+    }
 );
 window.setTimeout(update, 10000);
 }
