@@ -7,6 +7,7 @@ import (
 	"time"
 
 	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/tylerb/graceful.v1"
 )
 
 func isValidAPIKey(key string) bool {
@@ -58,7 +59,7 @@ func main() {
 	}
 	defer db.Close()
 	mux := http.NewServeMux()
-	mux.HandleFunc("/polls/", withCors(withVars(withData(db, withAPIKey(HandlePolls)))))
+	mux.HandleFunc("/polls/", withCORS(withVars(withData(db, withAPIKey(handlePolls)))))
 	log.Println("Starting web server on: ", *addr)
 	graceful.Run(*addr, 1*time.Second, mux)
 	log.Println("Stopping")

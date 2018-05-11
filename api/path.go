@@ -7,9 +7,10 @@ type Path struct {
 	ID   string
 }
 
+const pathSeparator = "/"
+
 func NewPath(p string) *Path {
 	var id string
-	var pathSeparator = "/"
 	p = strings.Trim(p, pathSeparator)
 	s := strings.Split(p, pathSeparator)
 	if len(s) > 1 {
@@ -20,5 +21,5 @@ func NewPath(p string) *Path {
 	return &Path{Path: p, ID: id}
 }
 func (p *Path) HasID() bool {
-	return len(p.Path) > 0
+	return len(p.ID) > 0
 }
